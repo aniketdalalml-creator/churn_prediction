@@ -1,0 +1,32 @@
+__pycache__/
+*.pyc
+.env
+venv/
+.env/
+.ipynb_checkpoints/
+*.pkl
+*.joblib
+
+# Python
+__pycache__/
+*.pyc
+venv/
+
+# Model files
+*.pkl
+*.joblib
+*.h5
+
+# Vector DB
+*.faiss
+chroma/
+db/
+
+# Environment
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
