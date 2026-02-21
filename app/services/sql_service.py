@@ -2,16 +2,18 @@ import os
 import psycopg2
 from dotenv import load_dotenv
 
+# Optional: useful for local dev, safe to keep
 load_dotenv()
 
 
 def get_connection():
     return psycopg2.connect(
-        host=os.getenv("SUPABASE_HOST"),
-        database=os.getenv("SUPABASE_DB"),
-        user=os.getenv("SUPABASE_USER"),
-        password=os.getenv("SUPABASE_PASSWORD"),
-        port=os.getenv("SUPABASE_PORT"),
+        host=os.getenv("SUPABASE_DB_HOST"),
+        port=int(os.getenv("SUPABASE_DB_PORT")),
+        dbname=os.getenv("SUPABASE_DB_NAME"),
+        user=os.getenv("SUPABASE_DB_USER"),
+        password=os.getenv("SUPABASE_DB_PASSWORD"),
+        sslmode="require"  # 🔥 REQUIRED for Supabase
     )
 
 
@@ -19,6 +21,7 @@ def fetch_query(query: str):
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(query)
+
     rows = cursor.fetchall()
     colnames = [desc[0] for desc in cursor.description]
 
